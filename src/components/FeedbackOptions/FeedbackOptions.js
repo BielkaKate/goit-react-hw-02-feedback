@@ -1,16 +1,13 @@
-import react from "react";
 import propTypes from "prop-types"
+import s from "./FeedbackOptions.module.css"
 
 
 const FeedbackOptions = ({options, onLeaveFeedback}) => {
     return (
 <div>
-    {/* <button type="button" name="good" onClick={onLeaveFeedback}>"good"</button>
-    <button type="button" name="neutral" onClick={onLeaveFeedback}>"neutral"</button>
-    <button type="button" name="bad" onClick={onLeaveFeedback}>"bad"</button> */}
    {options.map((option)=>{
        return(
-        <button type="button" name={option} onClick={onLeaveFeedback}>{option}</button>
+        <button className={s.optionButton} type="button" name={option} onClick={onLeaveFeedback}>{option}</button>
         )
     }
        )
@@ -20,7 +17,9 @@ const FeedbackOptions = ({options, onLeaveFeedback}) => {
 }
 
 FeedbackOptions.propTypes = {
-    onButtonIncrement: propTypes.func 
+    options: propTypes.arrayOf(propTypes.string.isRequired
+    ),
+    onLeaveFeedback: propTypes.func.isRequired
  }
 
 export default FeedbackOptions;

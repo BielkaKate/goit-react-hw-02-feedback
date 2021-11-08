@@ -4,8 +4,15 @@ import Section from './components/Section/Section'
 import FeedbackOptions from './components/FeedbackOptions/FeedbackOptions'
 import Statistics from "./components/Statistics/Statistics";
 import Notification from "./components/Notification/Notification";
+import propTypes from "prop-types"
 
 class App extends Component {
+static propTypes = {
+  good: propTypes.number,
+  neutral: propTypes.number,
+  bad: propTypes.number
+}
+
   state = {
     good: 0,
     neutral: 0,
@@ -34,7 +41,7 @@ return(
 
   render(){
     return (
-      <div>
+      <div className="container">
       <Section title="Please, leave feedback">
         <FeedbackOptions 
         options = {['good', 'neutral', 'bad']}
