@@ -1,4 +1,4 @@
-import react, {Component} from "react";
+import {Component} from "react";
 import './App.css';
 import Section from './components/Section/Section'
 import FeedbackOptions from './components/FeedbackOptions/FeedbackOptions'
@@ -20,26 +20,29 @@ static propTypes = {
   }
 
 onButtonClick = e => {
-console.log(e.target.name);
+  const {name} = e.target;
 this.setState(prevState => {
-  return ({[e.target.name]: prevState[e.target.name] + 1 })   
+  return ({[name]: prevState[name] + 1 })   
 })
   }
 
 countTotalFeedback(){
+  const {good, bad, neutral} = this.state
 return(
-  this.state.good + this.state.neutral + this.state.bad
+  good + neutral + bad
 )
 
 }
 
 countPositiveFeedbackPercentage(){
+  const {good, bad, neutral} = this.state
 return(
-  Math.round(this.state.good / (this.state.good + this.state.neutral + this.state.bad) * 100)
+  Math.round(good / (good + neutral + bad) * 100)
 )
 }
 
   render(){
+    const {good, bad, neutral} = this.state
     return (
       <div className="container">
       <Section title="Please, leave feedback">
@@ -49,12 +52,13 @@ return(
       </Section>
 
 <Section title="Statistics">
-{this.state.good || this.state.bad || this.state.neutral === true ? (
+
+{good || bad || neutral ? (
 
 <Statistics
-good={this.state.good}
-neutral={this.state.neutral}
-bad={this.state.bad}
+good={good}
+neutral={neutral}
+bad={bad}
 total = {this.countTotalFeedback()}
 positive = {this.countPositiveFeedbackPercentage()}
 />
@@ -62,6 +66,7 @@ positive = {this.countPositiveFeedbackPercentage()}
   <Notification message="No feedback given" />
 )
 }
+
 
          </Section>
       </div>
